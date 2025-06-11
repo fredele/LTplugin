@@ -22,7 +22,7 @@ cp -r LTplugin ~/.local/share/gedit/plugins/
 
 ## Usage
 
-Enable the plugin in Gedit, check "Tools/Grammar verification".
+Enable the plugin in Gedit, check "Tools/LT Correction".
 
 Errors are underlined in red.
 

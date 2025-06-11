@@ -1,0 +1,62 @@
+# French translations for PACKAGE package.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# fredele <frederic.klieber@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-12 00:48+0200\n"
+"PO-Revision-Date: 2025-06-12 00:59+0200\n"
+"Last-Translator: fredele <frederic.klieber@gmail.com>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: LTplugin.py:27
+msgid "LT Correction"
+msgstr ""
+
+#: LTplugin.py:234
+msgid "Automatic detection"
+msgstr "Détection automatique"
+
+#: LTplugin.py:235
+msgid "French"
+msgstr "Français"
+
+#: LTplugin.py:236
+msgid "English (US)"
+msgstr "Anglais (US)"
+
+#: LTplugin.py:237
+msgid "English (UK)"
+msgstr "Anglais (UK)"
+
+#: LTplugin.py:238
+msgid "German"
+msgstr "Allemand"
+
+#: LTplugin.py:239
+msgid "Spanish"
+msgstr ""
+
+#: LTplugin.py:267
+msgid "Show tooltips on errors"
+msgstr "Voir les tooltips"
+
+#: LTplugin.py:269
+msgid "Show or hide tooltips when hovering over errors"
+msgstr "Voir les tooltips"
+
+#: LTplugin.py:272
+msgid "LanguageTool Server:"
+msgstr "Serveur LanguageTool"
+
+#: LTplugin.py:274
+msgid "Correction language:"
+msgstr "Correction du langage"
