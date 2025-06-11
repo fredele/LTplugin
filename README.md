@@ -29,7 +29,7 @@ Errors are underlined in red.
 
 
 
-You can set your LT server in the .ini file manually or vith the preference dialog.
+You can set your LT server in the .ini file manually or with the preference dialog.
 
  
 
