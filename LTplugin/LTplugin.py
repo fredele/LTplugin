@@ -79,7 +79,7 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
 
         def worker():
             try:
-                query = urllib.parse.urlencode({"language": "fr", "text": text})
+                query = urllib.parse.urlencode({"language": "auto", "text": text})
                 with urllib.request.urlopen(f"{self.server_url}?{query}") as response:
                     result = json.loads(response.read().decode())
 
