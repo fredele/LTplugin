@@ -14,7 +14,7 @@
 
 ```bash
 git clone https://github.com/fredele/LTGedit.git
-cd LTGedit
+cd LTplugin
 # Create user plugin folder
 mkdir -p ~/.local/share/gedit/plugins/
 # Copy files to  ~/.local/share/gedit/plugins/
