@@ -1,14 +1,14 @@
-# Language Tool for Gedit
+# Language Tool for GEdit
 
+## Enables LT in legacy GEdit.
 
+![example.png](example.png)
 
-## Enables LT in legacy Gedit.
+## 
 
-* Quickly enable correction in gedit
-
-* configure server address
-
-
+* Quickly enable correction in GEdit
+* Configurable server address
+* Easy and hackable code
 
 ## Installation
 
@@ -27,11 +27,7 @@ Enable the plugin in Gedit, check "Tools/Grammar verification".
 
 Errors are underlined in red.
 
-
-
-You can set your LT server in the .ini file manually or with the preference dialog.
-
- 
+You can set your LT server in the .ini file manually or with the preference dialog within GEdit.
 
 ## Licence
 
