@@ -1,10 +1,14 @@
-# LT Check in Gedit
+# Language Tool for Gedit
+
+
 
 ## Enables LT in legacy Gedit.
 
-- Fonctionnalité 1
-- Fonctionnalité 2
-- Fonctionnalité 3
+* Quickly enable correction in gedit
+
+* configure server address
+
+
 
 ## Installation
 
@@ -26,8 +30,6 @@ Errors are underlined in red.
 
 
 You can set your LT server in the .ini file manually or vith the preference dialog.
-
-
 
  
 
