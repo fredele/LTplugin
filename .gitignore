@@ -1,1 +1,10 @@
 *.sh
+# Visual Studio Code settings
+/LTplugin/.vscode/
+/LTplugin/*.code-workspace
+/LTplugin/.history/
+/LTplugin/.settings/
+/LTplugin/*.sublime-workspace
+/LTplugin/*.sublime-project
+/LTplugin/# Python cache
+/LTplugin/__pycache__/
