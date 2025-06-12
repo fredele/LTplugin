@@ -1,4 +1,6 @@
 *.sh
+*.code-workspace
+Note.md
 # Visual Studio Code settings
 /LTplugin/.vscode/
 /LTplugin/*.code-workspace

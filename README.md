@@ -28,7 +28,7 @@ You can set your LT server in the .ini file manually or with the preference dial
 
 ## Limitations
 
-- Does not add words to dictionnary
+- Does not add words to dictionary
 
 - Cannot set enabledRules/disabledRules/enabledCategories/disabledCategories
 
@@ -38,6 +38,6 @@ You can set your LT server in the .ini file manually or with the preference dial
 
 - LT API : [LanguageTool API documentation](https://languagetool.org/http-api/?ref=public_apis)
 
-## Licence
+## License
 
-No Licence at all
+No License at all

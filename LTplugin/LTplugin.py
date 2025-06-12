@@ -59,7 +59,15 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
         with open(config_path, "w") as f:
             config.write(f)
         self.language = lang
-    
+
+        # Effacer tous les soulignements après changement de langue
+        if hasattr(self, "buffer"):
+            tag_table = self.buffer.get_tag_table()
+            for tag_name in ["highlight_grammar", "highlight_typos", "highlight_blue"]:
+                tag = tag_table.lookup(tag_name)
+                if tag:
+                    self.buffer.remove_tag(tag, self.buffer.get_start_iter(), self.buffer.get_end_iter())
+
     def get_show_tooltip(self):
         """Return True if tooltips are enabled, False otherwise."""
         config = configparser.ConfigParser()
@@ -169,14 +177,16 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
         start, end = self.buffer.get_bounds()
         text = self.buffer.get_text(start, end, True)
         current_version = version if version is not None else self.check_version
-
+        # Toujours lire la langue depuis la config
+        language = self.get_language()
+        self.show_status_message(f"language: {language}, text length: {len(text)}")
         def worker():
             try:
-                query = urllib.parse.urlencode({"language": self.language, "text": text})
+                query = urllib.parse.urlencode({"language": language, "text": text})
                 with urllib.request.urlopen(f"{self.server_url}?{query}") as response:
                     result = json.loads(response.read().decode())
                     if "matches" not in result:
-                        self.show_status_message("LanguageTool: No errors found.")
+                        self.show_status_message(_("LanguageTool: No errors found."))
                         return
                 def apply_results():
                     if current_version != self.check_version:
@@ -188,6 +198,7 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
                         tag = tag_table.lookup(tag_name)
                         if tag:
                             self.buffer.remove_tag(tag, self.buffer.get_start_iter(), self.buffer.get_end_iter())
+                    self.show_status_message(_("Found {count} errors").format(count=len(result.get('matches', []))))
                     for match in result.get("matches", []):
                         offset = match["offset"]
                         length = match["length"]
@@ -213,7 +224,7 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
                 GLib.idle_add(apply_results)
 
             except Exception as e:
-                self.show_status_message("LanguageTool error: " + str(e))
+                self.show_status_message(_("LanguageTool error: ") + str(e))
 
         threading.Thread(target=worker, daemon=True).start()
 
@@ -303,7 +314,7 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
         return box
     
     def show_status_message(self, message):
-        """Display a message in the Gedit status bar."""
+        """Display a message in the Gedit status bar (bottom left)."""
         window = self.view.get_toplevel()
         if hasattr(window, "get_statusbar"):
             statusbar = window.get_statusbar()
