@@ -1,9 +1,0 @@
-# Visual Studio Code settings
-
-*.code-workspace
-.history/
-.settings/
-*.sublime-workspace
-*.sublime-project
-# Python cache
-__pycache__/

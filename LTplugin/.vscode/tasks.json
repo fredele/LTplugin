@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Copier LTplugin",
+            "type": "shell",
+            "command": "cp -r /home/fredele/.local/share/gedit/plugins/LTplugin /mnt/Disque_2/Travaux/Python/LanguageTool_Plugin/",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
