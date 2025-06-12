@@ -5,3 +5,5 @@
 .settings/
 *.sublime-workspace
 *.sublime-project
+# Python cache
+__pycache__/
