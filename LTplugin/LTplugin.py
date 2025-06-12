@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from gi.repository import GObject, Gtk, Gedit, PeasGtk, Gio, GLib, Pango
+from gi.repository import GObject, Gtk, Gedit, PeasGtk, Gio, GLib, Pango, Gdk
 import urllib.request
 import urllib.parse
 import json
@@ -155,9 +155,14 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
             self.check_text()
 
     def ensure_tag(self):
-        """Create the highlight tag if necessary."""
-        if not self.buffer.get_tag_table().lookup("highlight"):
-            self.tag = self.buffer.create_tag("highlight", underline=Pango.Underline.ERROR)
+        """Create highlight tags for each error category if necessary."""
+        tag_table = self.buffer.get_tag_table()
+        if not tag_table.lookup("highlight_grammar"):
+            self.buffer.create_tag("highlight_grammar", underline=Pango.Underline.ERROR, underline_rgba=Gdk.RGBA(1, 0, 0, 1))  # Red
+        if not tag_table.lookup("highlight_typos"):
+            self.buffer.create_tag("highlight_typos", underline=Pango.Underline.ERROR, underline_rgba=Gdk.RGBA(1, 0.5, 0, 1))  # Orange
+        if not tag_table.lookup("highlight_blue"):
+            self.buffer.create_tag("highlight_blue", underline=Pango.Underline.ERROR, underline_rgba=Gdk.RGBA(0, 0.3, 1, 1))  # Blue
 
     def check_text(self, version=None):
         """Send the text to LanguageTool and apply error highlights."""
@@ -174,21 +179,35 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
                         self.show_status_message("LanguageTool: No errors found.")
                         return
                 def apply_results():
-                    # Check that the version hasn't changed
                     if current_version != self.check_version:
-                        return False  # Outdated result, do nothing
+                        return False
                     self.errors.clear()
-                    tag = self.buffer.get_tag_table().lookup("highlight")
-                    self.buffer.remove_tag(tag, self.buffer.get_start_iter(), self.buffer.get_end_iter())
+                    tag_table = self.buffer.get_tag_table()
+                    # Remove all highlight tags
+                    for tag_name in ["highlight_grammar", "highlight_typos", "highlight_blue"]:
+                        tag = tag_table.lookup(tag_name)
+                        if tag:
+                            self.buffer.remove_tag(tag, self.buffer.get_start_iter(), self.buffer.get_end_iter())
                     for match in result.get("matches", []):
                         offset = match["offset"]
                         length = match["length"]
                         message = match["message"]
                         replacements = match.get("replacements", [])
+                        rule = match.get("rule", {})
+                        category = rule.get("category", {}).get("id", "")
+                        # Choose tag by category
+                        if category == "GRAMMAR":
+                            tag = tag_table.lookup("highlight_grammar")
+                        elif category == "TYPOS":
+                            tag = tag_table.lookup("highlight_typos")
+                        elif category in ("STYLE", "PUNCTUATION", "CASING"):
+                            tag = tag_table.lookup("highlight_blue")
+                        else:
+                            tag = tag_table.lookup("highlight_grammar")  # Default: red
                         start_iter = self.buffer.get_iter_at_offset(offset)
                         end_iter = self.buffer.get_iter_at_offset(offset + length)
-                        self.buffer.apply_tag(self.tag, start_iter, end_iter)
-                        self.errors.append((offset, offset + length, message, replacements))
+                        self.buffer.apply_tag(tag, start_iter, end_iter)
+                        self.errors.append((offset, offset + length, message, replacements, rule))
                     return False
 
                 GLib.idle_add(apply_results)
@@ -212,9 +231,17 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
         word_start.backward_word_start()
         offset = word_start.get_offset()
 
-        for start, end, message, replacements in self.errors:
+        for start, end, message, replacements, rule in self.errors:
             if start <= offset < end:
-                tooltip.set_text(message + "\nSuggestions: " + ", ".join(r["value"] for r in replacements))
+                tooltip.set_text(
+                    message
+                    + "\nRule: "
+                    + rule.get("id", "")
+                    + " - "
+                    + rule.get("description", "")
+                    + "\nSuggestions: "
+                    + ", ".join(r["value"] for r in replacements)
+                )
                 return True
 
         return False
