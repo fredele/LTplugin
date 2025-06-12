@@ -1,0 +1,7 @@
+# Visual Studio Code settings
+.vscode/
+*.code-workspace
+.history/
+.settings/
+*.sublime-workspace
+*.sublime-project
