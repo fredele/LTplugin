@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-12 00:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: LTplugin.py:27
+msgid "LT Correction"
+msgstr ""
+
+#: LTplugin.py:234
+msgid "Automatic detection"
+msgstr ""
+
+#: LTplugin.py:235
+msgid "French"
+msgstr ""
+
+#: LTplugin.py:236
+msgid "English (US)"
+msgstr ""
+
+#: LTplugin.py:237
+msgid "English (UK)"
+msgstr ""
+
+#: LTplugin.py:238
+msgid "German"
+msgstr ""
+
+#: LTplugin.py:239
+msgid "Spanish"
+msgstr ""
+
+#: LTplugin.py:267
+msgid "Show tooltips on errors"
+msgstr ""
+
+#: LTplugin.py:269
+msgid "Show or hide tooltips when hovering over errors"
+msgstr ""
+
+#: LTplugin.py:272
+msgid "LanguageTool Server:"
+msgstr ""
+
+#: LTplugin.py:274
+msgid "Correction language:"
+msgstr ""
