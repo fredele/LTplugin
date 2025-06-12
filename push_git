@@ -1,6 +1,0 @@
-#!/bin/bash
-cp -r /home/fredele/.local/share/gedit/plugins/LTplugin /mnt/Disque_2/Travaux/Python/LanguageTool_Plugin/
-cd /mnt/Disque_2/Travaux/Python/LanguageTool_Plugin/
-git add .
-git commit -m "First commit"
-git push -u origin main
