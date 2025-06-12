@@ -4,7 +4,7 @@
         {
             "label": "Copier et Pousser LTplugin",
             "type": "shell",
-            "command": "/mnt/Disque_2/Travaux/Python/LanguageTool_Plugin/push_git",
+            "command": "/mnt/Disque_2/Travaux/Python/LanguageTool_Plugin/push_git.sh",
             "group": {
                 "kind": "build",
                 "isDefault": true
