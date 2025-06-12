@@ -163,6 +163,8 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
             self.buffer.create_tag("highlight_typos", underline=Pango.Underline.ERROR, underline_rgba=Gdk.RGBA(1, 0.5, 0, 1))  # Orange
         if not tag_table.lookup("highlight_blue"):
             self.buffer.create_tag("highlight_blue", underline=Pango.Underline.ERROR, underline_rgba=Gdk.RGBA(0, 0.3, 1, 1))  # Blue
+        if not tag_table.lookup("highlight_other"):
+            self.buffer.create_tag("highlight_other", underline=Pango.Underline.ERROR, underline_rgba=Gdk.RGBA(0.5, 0.5, 0.5, 1))  # Grey
 
     def check_text(self, version=None):
         """Send the text to LanguageTool and apply error highlights."""
@@ -203,7 +205,7 @@ class LTCheckWindowActivatable(GObject.Object, Gedit.ViewActivatable, PeasGtk.Co
                         elif category in ("STYLE", "PUNCTUATION", "CASING"):
                             tag = tag_table.lookup("highlight_blue")
                         else:
-                            tag = tag_table.lookup("highlight_grammar")  # Default: red
+                            tag = tag_table.lookup("highlight_other")  # Default: grey
                         start_iter = self.buffer.get_iter_at_offset(offset)
                         end_iter = self.buffer.get_iter_at_offset(offset + length)
                         self.buffer.apply_tag(tag, start_iter, end_iter)
